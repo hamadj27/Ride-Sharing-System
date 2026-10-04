@@ -11,7 +11,13 @@ public class LinkedList<T> {
 	public boolean empty() {
         return head == null;
     }
-
+	public void findFirst(){
+		current = head;
+	}
+	public void findNext(){
+	current = current.next;
+	
+	}
     public boolean last() {
         return current != null && current.next == null;
     }
