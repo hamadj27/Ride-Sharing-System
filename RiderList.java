@@ -1,40 +1,71 @@
-public class RiderList implements IRideList {
+public class RiderList implements IRiderList {
 
 
-    public boolean addRide(IRide ride) {
+    public boolean add(IRider rider) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addRide'");
+        throw new UnsupportedOperationException("Unimplemented method 'add'");
     }
 
 
-    public boolean removeRideById(int rideId) {
+    public IRider findById(int riderId) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeRideById'");
+        throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
 
 
-    public LinkedList<IRide> getAllAlphabetically() {
+    public LinkedList<IRider> findByName(String fullName) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllAlphabetically'");
+        throw new UnsupportedOperationException("Unimplemented method 'findByName'");
     }
 
 
-    public LinkedList<IRide> findByPickupLocation(String pickupLocation) {
+    public IRider findByEmail(String email) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByPickupLocation'");
+        throw new UnsupportedOperationException("Unimplemented method 'findByEmail'");
     }
 
 
-    public LinkedList<IRide> findByRiderName(String riderFullName) {
+    public LinkedList<IRider> findByHomeCity(String homeCity) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByRiderName'");
+        throw new UnsupportedOperationException("Unimplemented method 'findByHomeCity'");
     }
 
 
+    public LinkedList<IRider> getAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+    }
+
+
+    public boolean removeById(int riderId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removeById'");
+    }
+
+
+    public boolean removeByEmail(String email) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removeByEmail'");
+    }
+
+    @Override
+    public int removeByName(String fullName) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removeByName'");
+    }
+
+    @Override
+    public int removeByHomeCity(String homeCity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removeByHomeCity'");
+    }
+
+    @Override
     public int size() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'size'");
     }
+
 
     
 }
