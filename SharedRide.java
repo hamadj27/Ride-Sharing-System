@@ -36,7 +36,7 @@ public class SharedRide extends Ride implements ISharedRide {
 
         participants.findFirst();
 
-        while (participants.current != null) {
+        while (participants.retrieve() != null) {
 
             if (participants.retrieve().getId() == riderId) {
                 participants.remove();
@@ -61,15 +61,15 @@ public boolean isEmpty() { // Checks if there are no riders in the shared ride
             return false;
         }
 
-        participants.current = participants.head;
+        participants.findFirst();
 
-        while (participants.current != null) {
+        while (participants.retrieve() != null) {
 
             if (participants.retrieve().getId() == riderId) {
                 return true;
             }
 
-            participants.current = participants.current.next;
+            participants.findNext();
         }
 
         return false;

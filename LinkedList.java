@@ -1,66 +1,49 @@
-
-
 public class LinkedList<T> {
-<<<<<<< HEAD
-	Node<T> head;
-	Node<T> current;
-	Node<T> tail ;
+	private Node<T> head;
+	private Node<T> current;
+	private Node<T> tail;
 	
 	public LinkedList() {
-=======
-    Node<T> head;
-    Node<T> current;
-    Node<T> tail ;
-
-    public LinkedList() {
->>>>>>> models
         head = current = tail = null;
     }
-    public boolean empty() {
+	public boolean empty() {
         return head == null;
     }
-<<<<<<< HEAD
 	public void findFirst(){
 		current = head;
 	}
 	public void findNext(){
-	current = current.next;
+	current = current.getNext();
 	
 	}
-=======
-    public void findFirst(){
-        current = head;
-    }
-    public void findNext(){
-        current = current.next;
-
-    }
->>>>>>> models
     public boolean last() {
-        return current != null && current.next == null;
+        return current != null && current.getNext() == null;
     }
     public T retrieve() {
-        if(current!=null)return current.data;
-        return null;
+    	if(current!=null)return current.getData();
+    	return null;
     }
-
+    public Node<T> getHead() {
+        return head;
+    }
+    
     public void update (T data) {
-        current.data = data;
+    	current.setData(data);
     }
-
+    
     public void insert(T data) {
         Node<T> tmp = new Node<T>(data);
         if (empty()) {
             current = head = tail = tmp;
         } else {
-            tmp.next = current.next;
-            current.next = tmp;
+            tmp.setNext(current.getNext());
+            current.setNext(tmp);
             if (current == tail) {
                 tail = tmp;
             }
             current = tmp;
         }
-
+    
     }
 
     public void remove() {
@@ -69,27 +52,27 @@ public class LinkedList<T> {
         }
 
         if (current == head) {
-            head = head.next;
+            head = head.getNext();
             if (head == null) {
-                tail = null; // صارت القائمة فاضية
+                tail = null;
             }
             current = head;
             return;
         }
 
         Node<T> prev = head;
-        while (prev.next != current) {
-            prev = prev.next;
+        while (prev.getNext() != current) {
+            prev = prev.getNext();
         }
 
-        prev.next = current.next;
+        prev.setNext(current.getNext());
 
 
         if (current == tail) {
             tail = prev;
             current = head;
         } else {
-            current = current.next;
+            current = current.getNext();
         }
     }
     public void insertLast(T val) {
@@ -97,12 +80,8 @@ public class LinkedList<T> {
         if (empty()) {
             head = current = tail = tmp;
         } else {
-            tail.next = tmp;
+            tail.setNext(tmp);
             tail = tmp;
         }
-<<<<<<< HEAD
 }
-=======
-    }
->>>>>>> models
 }

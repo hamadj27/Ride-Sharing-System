@@ -1,4 +1,3 @@
-
 public class DriverList implements IDriverList {
     private Node<IDriver> head;
 
@@ -16,30 +15,29 @@ public class DriverList implements IDriverList {
             head = tmp;
             return true;
         }
-        
-        if (head.data.getId() == driver.getId()) {
+        if (head.getData().getId() == driver.getId()) {
             return false;
         }
         
-        if (head.data.getId() > driver.getId()) {
-            tmp.next = head;
+        if (head.getData().getId() > driver.getId()) {
+            tmp.setNext(head);
             head = tmp;
             return true;
         }
         
         Node<IDriver> current = head;
-        while (current.next != null) {
-            if (current.next.data.getId() == driver.getId()) {
+        while (current.getNext() != null) {
+            if (current.getNext().getData().getId() == driver.getId()) {
                 return false; 
             }
-            if (current.next.data.getId() > driver.getId()) {
+            if (current.getNext().getData().getId() > driver.getId()) {
                 break;
             }
-            current = current.next;
+            current = current.getNext();
         }
         
-        tmp.next = current.next;
-        current.next = tmp;
+        tmp.setNext(current.getNext());
+        current.setNext(tmp);
         return true;
     }
 
@@ -47,13 +45,13 @@ public class DriverList implements IDriverList {
     public IDriver findById(int driverId) {
         Node<IDriver> current = head;
         while (current != null) {
-            if (current.data.getId() == driverId) {
-                return current.data;
+            if (current.getData().getId() == driverId) {
+                return current.getData();
             }
-            if (current.data.getId() > driverId) {
+            if (current.getData().getId() > driverId) {
                 break;
             }
-            current = current.next;
+            current = current.getNext();
         }
         return null;
     }
@@ -63,10 +61,10 @@ public class DriverList implements IDriverList {
         LinkedList<IDriver> result = new LinkedList<IDriver>();
         Node<IDriver> current = head;
         while (current != null) {
-            if (current.data.getName().equals(fullName)) {
-                result.insertLast(current.data);
+            if (current.getData().getName().equals(fullName)) {
+                result.insertLast(current.getData());
             }
-            current = current.next;
+            current = current.getNext();
         }
         return result;
     }
@@ -75,10 +73,10 @@ public class DriverList implements IDriverList {
     public IDriver findByVehiclePlate(String vehiclePlate) {
         Node<IDriver> current = head;
         while (current != null) {
-            if (current.data.getVehiclePlate().equals(vehiclePlate)) {
-                return current.data;
+            if (current.getData().getVehiclePlate().equals(vehiclePlate)) {
+                return current.getData();
             }
-            current = current.next;
+            current = current.getNext();
         }
         return null;
     }
@@ -88,10 +86,10 @@ public class DriverList implements IDriverList {
         LinkedList<IDriver> result = new LinkedList<IDriver>();
         Node<IDriver> current = head;
         while (current != null) {
-            if (current.data.getVehicleType() == vehicleType) {
-                result.insertLast(current.data);
+            if (current.getData().getVehicleType() == vehicleType) {
+                result.insertLast(current.getData());
             }
-            current = current.next;
+            current = current.getNext();
         }
         return result;
     }
@@ -101,8 +99,8 @@ public class DriverList implements IDriverList {
         LinkedList<IDriver> result = new LinkedList<IDriver>();
         Node<IDriver> current = head;
         while (current != null) {
-            result.insertLast(current.data);
-            current = current.next;
+            result.insertLast(current.getData());
+            current = current.getNext();
         }
         return result;
     }
@@ -111,21 +109,21 @@ public class DriverList implements IDriverList {
     public boolean removeById(int driverId) {
         if (head == null) return false;
         
-        if (head.data.getId() == driverId) {
-            head = head.next;
+        if (head.getData().getId() == driverId) {
+            head = head.getNext();
             return true;
         }
         
         Node<IDriver> current = head;
-        while (current.next != null) {
-            if (current.next.data.getId() == driverId) {
-                current.next = current.next.next;
+        while (current.getNext() != null) {
+            if (current.getNext().getData().getId() == driverId) {
+                current.setNext(current.getNext().getNext());
                 return true;
             }
-            if (current.next.data.getId() > driverId) {
+            if (current.getNext().getData().getId() > driverId) {
                 break;
             }
-            current = current.next;
+            current = current.getNext();
         }
         return false;
     }
@@ -134,18 +132,18 @@ public class DriverList implements IDriverList {
     public boolean removeByVehiclePlate(String vehiclePlate) {
         if (head == null) return false;
         
-        if (head.data.getVehiclePlate().equals(vehiclePlate)) {
-            head = head.next;
+        if (head.getData().getVehiclePlate().equals(vehiclePlate)) {
+            head = head.getNext();
             return true;
         }
         
         Node<IDriver> current = head;
-        while (current.next != null) {
-            if (current.next.data.getVehiclePlate().equals(vehiclePlate)) {
-                current.next = current.next.next;
+        while (current.getNext() != null) {
+            if (current.getNext().getData().getVehiclePlate().equals(vehiclePlate)) {
+                current.setNext(current.getNext().getNext());
                 return true;
             }
-            current = current.next;
+            current = current.getNext();
         }
         return false;
     }
@@ -154,20 +152,20 @@ public class DriverList implements IDriverList {
     public int removeByName(String fullName) {
         int count = 0;
         
-        while (head != null && head.data.getName().equals(fullName)) {
-            head = head.next;
+        while (head != null && head.getData().getName().equals(fullName)) {
+            head = head.getNext();
             count++;
         }
         
         if (head == null) return count;
         
         Node<IDriver> current = head;
-        while (current.next != null) {
-            if (current.next.data.getName().equals(fullName)) {
-                current.next = current.next.next;
+        while (current.getNext() != null) {
+            if (current.getNext().getData().getName().equals(fullName)) {
+                current.setNext(current.getNext().getNext());
                 count++;
             } else {
-                current = current.next;
+                current = current.getNext();
             }
         }
         return count;
@@ -177,20 +175,20 @@ public class DriverList implements IDriverList {
     public int removeByVehicleType(VehicleType vehicleType) {
         int count = 0;
         
-        while (head != null && head.data.getVehicleType() == vehicleType) {
-            head = head.next;
+        while (head != null && head.getData().getVehicleType() == vehicleType) {
+            head = head.getNext();
             count++;
         }
         
         if (head == null) return count;
         
         Node<IDriver> current = head;
-        while (current.next != null) {
-            if (current.next.data.getVehicleType() == vehicleType) {
-                current.next = current.next.next;
+        while (current.getNext() != null) {
+            if (current.getNext().getData().getVehicleType() == vehicleType) {
+                current.setNext(current.getNext().getNext());
                 count++;
             } else {
-                current = current.next;
+                current = current.getNext();
             }
         }
         return count;
@@ -202,7 +200,7 @@ public class DriverList implements IDriverList {
         Node<IDriver> current = head;
         while (current != null) {
             count++;
-            current = current.next;
+            current = current.getNext();
         }
         return count;
     }

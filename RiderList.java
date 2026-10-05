@@ -1,6 +1,6 @@
 // RiderList.java
 public class RiderList implements IRiderList {
-    private Node<IRider> head; // نستخدم الـ Node حقك كبداية للقائمة
+    private Node<IRider> head;
 
     public RiderList() {
         head = null;
@@ -12,37 +12,33 @@ public class RiderList implements IRiderList {
         
         Node<IRider> tmp = new Node<IRider>(rider);
         
-        // إذا كانت القائمة فاضية
         if (head == null) {
             head = tmp;
             return true;
         }
         
-        // التحقق من الإضافة في البداية (إذا كان الـ ID أصغر من أول عنصر)
-        if (head.data.getId() == rider.getId()) {
-            return false; // الـ ID موجود مسبقاً
+        if (head.getData().getId() == rider.getId()) {
+            return false;
         }
-        if (head.data.getId() > rider.getId()) {
-            tmp.next = head;
+        if (head.getData().getId() > rider.getId()) {
+            tmp.setNext(head);
             head = tmp;
             return true;
         }
         
-        // البحث عن المكان المناسب للإدخال المرتب
         Node<IRider> current = head;
-        while (current.next != null) {
-            if (current.next.data.getId() == rider.getId()) {
-                return false; // الـ ID موجود مسبقاً
+        while (current.getNext() != null) {
+            if (current.getNext().getData().getId() == rider.getId()) {
+                return false;
             }
-            if (current.next.data.getId() > rider.getId()) {
-                break; // لقينا المكان الصح
+            if (current.getNext().getData().getId() > rider.getId()) {
+                break;
             }
-            current = current.next;
+            current = current.getNext();
         }
         
-        // ربط النود الجديد
-        tmp.next = current.next;
-        current.next = tmp;
+        tmp.setNext(current.getNext());
+        current.setNext(tmp);
         return true;
     }
 
@@ -50,14 +46,13 @@ public class RiderList implements IRiderList {
     public IRider findById(int riderId) {
         Node<IRider> current = head;
         while (current != null) {
-            if (current.data.getId() == riderId) {
-                return current.data;
+            if (current.getData().getId() == riderId) {
+                return current.getData();
             }
-            // عشان القائمة مرتبة، إذا وصلنا لـ ID أكبر، يعني مستحيل نلقاه بعدين
-            if (current.data.getId() > riderId) {
+            if (current.getData().getId() > riderId) {
                 break;
             }
-            current = current.next;
+            current = current.getNext();
         }
         return null;
     }
@@ -67,11 +62,10 @@ public class RiderList implements IRiderList {
         LinkedList<IRider> result = new LinkedList<IRider>();
         Node<IRider> current = head;
         while (current != null) {
-            // مطابقة الاسم بالكامل حسب المطلوب
-            if (current.data.getName().equals(fullName)) {
-                result.insertLast(current.data);
+            if (current.getData().getName().equals(fullName)) {
+                result.insertLast(current.getData());
             }
-            current = current.next;
+            current = current.getNext();
         }
         return result;
     }
@@ -80,10 +74,10 @@ public class RiderList implements IRiderList {
     public IRider findByEmail(String email) {
         Node<IRider> current = head;
         while (current != null) {
-            if (current.data.getEmail().equals(email)) {
-                return current.data;
+            if (current.getData().getEmail().equals(email)) {
+                return current.getData();
             }
-            current = current.next;
+            current = current.getNext();
         }
         return null;
     }
@@ -93,10 +87,10 @@ public class RiderList implements IRiderList {
         LinkedList<IRider> result = new LinkedList<IRider>();
         Node<IRider> current = head;
         while (current != null) {
-            if (current.data.getHomeCity().equals(homeCity)) {
-                result.insertLast(current.data);
+            if (current.getData().getHomeCity().equals(homeCity)) {
+                result.insertLast(current.getData());
             }
-            current = current.next;
+            current = current.getNext();
         }
         return result;
     }
@@ -106,8 +100,8 @@ public class RiderList implements IRiderList {
         LinkedList<IRider> result = new LinkedList<IRider>();
         Node<IRider> current = head;
         while (current != null) {
-            result.insertLast(current.data);
-            current = current.next;
+            result.insertLast(current.getData());
+            current = current.getNext();
         }
         return result;
     }
@@ -116,21 +110,21 @@ public class RiderList implements IRiderList {
     public boolean removeById(int riderId) {
         if (head == null) return false;
         
-        if (head.data.getId() == riderId) {
-            head = head.next;
+        if (head.getData().getId() == riderId) {
+            head = head.getNext();
             return true;
         }
         
         Node<IRider> current = head;
-        while (current.next != null) {
-            if (current.next.data.getId() == riderId) {
-                current.next = current.next.next;
+        while (current.getNext() != null) {
+            if (current.getNext().getData().getId() == riderId) {
+                current.setNext(current.getNext().getNext());
                 return true;
             }
-            if (current.next.data.getId() > riderId) {
+            if (current.getNext().getData().getId() > riderId) {
                 break;
             }
-            current = current.next;
+            current = current.getNext();
         }
         return false;
     }
@@ -139,18 +133,18 @@ public class RiderList implements IRiderList {
     public boolean removeByEmail(String email) {
         if (head == null) return false;
         
-        if (head.data.getEmail().equals(email)) {
-            head = head.next;
+        if (head.getData().getEmail().equals(email)) {
+            head = head.getNext();
             return true;
         }
         
         Node<IRider> current = head;
-        while (current.next != null) {
-            if (current.next.data.getEmail().equals(email)) {
-                current.next = current.next.next;
+        while (current.getNext() != null) {
+            if (current.getNext().getData().getEmail().equals(email)) {
+                current.setNext(current.getNext().getNext());
                 return true;
             }
-            current = current.next;
+            current = current.getNext();
         }
         return false;
     }
@@ -161,21 +155,20 @@ public class RiderList implements IRiderList {
         
      
         
-        // التعامل مع حالات المطابقة لو كانت في بداية القائمة (ممكن يكون أكثر من واحد ورا بعض)
-        while (head != null && head.data.getName().equals(fullName)) {
-            head = head.next;
+        while (head != null && head.getData().getName().equals(fullName)) {
+            head = head.getNext();
             count++;
         }
         
         if (head == null) return count;
         
         Node<IRider> current = head;
-        while (current.next != null) {
-            if (current.next.data.getName().equals(fullName)) {
-                current.next = current.next.next; // نتخطى النود ونحذفه
+        while (current.getNext() != null) {
+            if (current.getNext().getData().getName().equals(fullName)) {
+                current.setNext(current.getNext().getNext());
                 count++;
             } else {
-                current = current.next; // نمشي للي بعده بس إذا ما حذفنا
+                current = current.getNext();
             }
         }
         return count;
@@ -185,20 +178,20 @@ public class RiderList implements IRiderList {
     public int removeByHomeCity(String homeCity) {
         int count = 0;
         
-        while (head != null && head.data.getHomeCity().equals(homeCity)) {
-            head = head.next;
+        while (head != null && head.getData().getHomeCity().equals(homeCity)) {
+            head = head.getNext();
             count++;
         }
         
         if (head == null) return count;
         
         Node<IRider> current = head;
-        while (current.next != null) {
-            if (current.next.data.getHomeCity().equals(homeCity)) {
-                current.next = current.next.next;
+        while (current.getNext() != null) {
+            if (current.getNext().getData().getHomeCity().equals(homeCity)) {
+                current.setNext(current.getNext().getNext());
                 count++;
             } else {
-                current = current.next;
+                current = current.getNext();
             }
         }
         return count;
@@ -210,7 +203,7 @@ public class RiderList implements IRiderList {
         Node<IRider> current = head;
         while (current != null) {
             count++;
-            current = current.next;
+            current = current.getNext();
         }
         return count;
     }
