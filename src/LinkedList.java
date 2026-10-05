@@ -1,5 +1,7 @@
+
+
 public class LinkedList<T> {
-Node<T> head;
+	Node<T> head;
 	Node<T> current;
 	Node<T> tail ;
 	
@@ -9,7 +11,13 @@ Node<T> head;
 	public boolean empty() {
         return head == null;
     }
-
+	public void findFirst(){
+		current = head;
+	}
+	public void findNext(){
+	current = current.next;
+	
+	}
     public boolean last() {
         return current != null && current.next == null;
     }
