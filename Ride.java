@@ -1,5 +1,7 @@
 public abstract class Ride implements IRide {
 
+    static int latestRideId = 1000;
+
     private final int rideId;
     private IDriver driver;
     private String pickupLocation;
