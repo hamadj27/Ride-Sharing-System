@@ -1,94 +1,81 @@
 public class SharedRide extends Ride implements ISharedRide {
 
+    private LinkedList<IRider> participants;
 
-    public int getRideId() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRideId'");
+    public SharedRide(int rideId, IDriver driver, String pickupLocation,
+                      String dropoffLocation, IDateTime pickupTime,
+                      IDateTime dropoffTime) {
+
+        super(rideId, driver, pickupLocation, dropoffLocation, pickupTime, dropoffTime);
+        this.participants = new LinkedList<IRider>();
+
+    }//big o is 1
+
+    @Override
+    public LinkedList<IRider> getParticipants() {  // Returns all riders in this shared ride
+        return participants;
+    }//big o is 1
+
+
+    @Override
+    public boolean addParticipant(IRider rider) { // Add a rider to the end of the participants list
+        if (rider == null) {
+            return false;
+        }//big o is 1
+
+        participants.insertLast(rider); //From linkedlist.java
+        return true;
     }
 
+    @Override
+    public boolean removeParticipantById(int riderId) { // Searches for a rider by ID and removes them
 
-    public String getPickupLocation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPickupLocation'");
-    }
+        if (participants.empty()) { //From linkedlist.java
+            return false;
+        }
 
+        participants.current = participants.head;
 
-    public void setPickupLocation(String pickupLocation) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPickupLocation'");
-    }
+        while (participants.current != null) {
 
+            if (participants.retrieve().getId() == riderId) {
+                participants.remove();
+                return true;
+            }
 
-    public IDateTime getPickupTime() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPickupTime'");
-    }
+            participants.current = participants.current.next;
+        }
 
+        return false;
+    }//big o is n
 
-    public IDateTime getDropoffTime() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDropoffTime'");
-    }
+@Override
+public boolean isEmpty() { // Checks if there are no riders in the shared ride
+    return participants.empty();
+}//big o is 1
 
+    @Override
+    public boolean hasRider(int riderId) {  // Checks if a rider with the given ID is in the shared ride
 
-    public String getDropoffLocation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDropoffLocation'");
-    }
+        if (participants.empty()) {
+            return false;
+        }
 
+        participants.current = participants.head;
 
-    public void setDropoffLocation(String dropoffLocation) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setDropoffLocation'");
-    }
+        while (participants.current != null) {
 
+            if (participants.retrieve().getId() == riderId) {
+                return true;
+            }
 
-    public IDriver getDriver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDriver'");
-    }
+            participants.current = participants.current.next;
+        }
 
-
-    public void setDriver(IDriver driver) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setDriver'");
-    }
-
-
-    public boolean hasRider(int riderId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasRider'");
-    }
+        return false;
+    }//big o is n
 
 
-    public int compareTo(IRide other) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
-    }
-
-
-    public LinkedList<IRider> getParticipants() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getParticipants'");
-    }
-
-
-    public boolean addParticipant(IRider rider) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addParticipant'");
-    }
-
-
-    public boolean removeParticipantById(int riderId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeParticipantById'");
-    }
-
-
-    public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
-    }
 
 
 }
