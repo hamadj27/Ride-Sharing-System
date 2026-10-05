@@ -7,7 +7,7 @@ public class SharedRide extends Ride implements ISharedRide {
                       IDateTime dropoffTime) {
 
         super(rideId, driver, pickupLocation, dropoffLocation, pickupTime, dropoffTime);
-        this.participants = new LinkedList<IRider>();
+        this.participants = participants;
 
     }//big o is 1
 
@@ -28,13 +28,13 @@ public class SharedRide extends Ride implements ISharedRide {
     }
 
     @Override
-    public boolean removeParticipantById(int riderId) { // Searches for a rider by ID and removes them
+    public boolean removeParticipantById(int riderId) {
 
-        if (participants.empty()) { //From linkedlist.java
+        if (participants.empty()) {
             return false;
         }
 
-        participants.current = participants.head;
+        participants.findFirst();
 
         while (participants.current != null) {
 
@@ -43,7 +43,7 @@ public class SharedRide extends Ride implements ISharedRide {
                 return true;
             }
 
-            participants.current = participants.current.next;
+            participants.findNext();
         }
 
         return false;

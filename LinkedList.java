@@ -1,27 +1,35 @@
+
+
 public class LinkedList<T> {
-Node<T> head;
-	Node<T> current;
-	Node<T> tail ;
-	
-	public LinkedList() {
+    Node<T> head;
+    Node<T> current;
+    Node<T> tail ;
+
+    public LinkedList() {
         head = current = tail = null;
     }
-	public boolean empty() {
+    public boolean empty() {
         return head == null;
     }
+    public void findFirst(){
+        current = head;
+    }
+    public void findNext(){
+        current = current.next;
 
+    }
     public boolean last() {
         return current != null && current.next == null;
     }
     public T retrieve() {
-    	if(current!=null)return current.data;
-    	return null;
+        if(current!=null)return current.data;
+        return null;
     }
-    
+
     public void update (T data) {
-    	current.data = data;
+        current.data = data;
     }
-    
+
     public void insert(T data) {
         Node<T> tmp = new Node<T>(data);
         if (empty()) {
@@ -34,9 +42,9 @@ Node<T> head;
             }
             current = tmp;
         }
-    
+
     }
-    
+
     public void remove() {
         if (empty()) {
             return;
@@ -58,7 +66,7 @@ Node<T> head;
 
         prev.next = current.next;
 
-        
+
         if (current == tail) {
             tail = prev;
             current = head;
@@ -74,5 +82,5 @@ Node<T> head;
             tail.next = tmp;
             tail = tmp;
         }
-}
+    }
 }
