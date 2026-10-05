@@ -1,36 +1,4 @@
 public class Rider extends Person implements IRider {
-<<<<<<< HEAD
-
-
-    public String getEmail() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEmail'");
-    }
-
-
-    public void setEmail(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setEmail'");
-    }
-
-
-    public String getHomeCity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getHomeCity'");
-    }
-
-
-    public void setHomeCity(String homeCity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setHomeCity'");
-    }
-
-
-    public int compareTo(IRider other) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
-    }
-=======
 
     private String email;
     private String homeCity;
@@ -77,7 +45,6 @@ public class Rider extends Person implements IRider {
 
 
 
->>>>>>> models
 
 
 
