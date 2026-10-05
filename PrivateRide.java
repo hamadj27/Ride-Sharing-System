@@ -1,82 +1,28 @@
 public class PrivateRide extends Ride implements IPrivateRide {
 
+    private IRider rider;
 
-    public int getRideId() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRideId'");
-    }
+    public PrivateRide(int rideId, IDriver driver, String pickupLocation,String dropoffLocation, IDateTime pickupTime,
+                       IDateTime dropoffTime, IRider rider) {
 
+        super(rideId, driver, pickupLocation, dropoffLocation, pickupTime, dropoffTime);
+        this.rider = rider;
 
-    public String getPickupLocation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPickupLocation'");
-    }
-
-
-    public void setPickupLocation(String pickupLocation) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPickupLocation'");
-    }
-
-
-    public IDateTime getPickupTime() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPickupTime'");
-    }
-
-
-    public IDateTime getDropoffTime() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDropoffTime'");
-    }
-
-
-    public String getDropoffLocation() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDropoffLocation'");
-    }
-
-
-    public void setDropoffLocation(String dropoffLocation) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setDropoffLocation'");
-    }
-
-
-    public IDriver getDriver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDriver'");
-    }
-
-
-    public void setDriver(IDriver driver) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setDriver'");
-    }
-
-
-    public boolean hasRider(int riderId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasRider'");
-    }
-
-
-    public int compareTo(IRide other) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
-    }
-
-
+    }//big o is 1
+    @Override
     public IRider getRider() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRider'");
-    }
+        return rider;
+    }//big o is 1
 
-
+    @Override
     public void setRider(IRider rider) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setRider'");
-    }
+        this.rider = rider;
+    }//big o is 1
+
+    @Override
+    public boolean hasRider(int riderId) {
+        return rider != null && rider.getId() == riderId;
+    }//big o is 1
 
 
 }

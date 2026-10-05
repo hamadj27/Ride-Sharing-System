@@ -1,69 +1,51 @@
 public class Driver extends Person implements IDriver {
 
-    public int getId() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getId'");
-    }
+    private String vehiclePlate;
+    private VehicleType vehicleType;
 
-    
-    public String getName() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getName'");
-    }
+    public Driver(int id, String name, String phoneNumber, String vehiclePlate, VehicleType vehicleType) {
+        super(id, name, phoneNumber);
+        setVehiclePlate(vehiclePlate);
+        this.vehicleType = vehicleType;
 
-    
-    public void setName(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setName'");
-    }
+    }//big o is 1
 
-    
-    public String getPhoneNumber() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPhoneNumber'");
-    }
-
-    
-    public void setPhoneNumber(String phoneNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setPhoneNumber'");
-    }
-
-    
-    public LinkedList<IRide> getRideHistory() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRideHistory'");
-    }
-
-    
+    @Override
     public String getVehiclePlate() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getVehiclePlate'");
-    }
-
-    
+        return vehiclePlate;
+    }//big o is 1
+    @Override
     public void setVehiclePlate(String vehiclePlate) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setVehiclePlate'");
-    }
+        if (vehiclePlate == null || !vehiclePlate.matches("[A-Z]{3}\\d{4}")) {
+            throw new IllegalArgumentException("Vehicle plate must be 3 uppercase letters followed by 4 digits.");
 
-    
+        }
+        this.vehiclePlate = vehiclePlate;
+    }//big o is 1
+
+
+    @Override
     public VehicleType getVehicleType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getVehicleType'");
-    }
+        return vehicleType;
+    }//big o is 1
 
 
+    @Override
     public void setVehicleType(VehicleType vehicleType) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setVehicleType'");
-    }
+        this.vehicleType = vehicleType;
+    }//big o is 1
 
-
+    @Override
     public int compareTo(IDriver other) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
-    }
+        if (this.getId() < other.getId()) {
+            return -1;
+        } else if (this.getId() > other.getId()) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }//big o is 1
 
-    
+
+
 }
