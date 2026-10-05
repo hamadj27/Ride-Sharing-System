@@ -106,12 +106,26 @@ public class RideSharingSystem implements IRideSharingSystem {
      * It returns true if the rider was found and removed; false otherwise
      */
     public boolean removeRider(int riderId) {
-        // LinkedList<IRide> rides = rideList.getAllAlphabetically();
-        // if(riderList.removeById(riderId)) {
-        //     for (int i = 0; i < rideList.size(); i++)
-        //         if (rides)
-        // }
-        return true;
+        LinkedList<IRide> rides = rideList.getAllAlphabetically();
+        if(riderList.removeById(riderId)) {
+            // rides.findFirst();
+            for (int i = 0; i < rideList.size(); i++) {
+                IRide ride = rides.retrieve();
+                if (ride.hasRider(riderId)) {
+                    if (ride instanceof PrivateRide) {
+                        rideList.removeRideById(ride.getRideId());
+                    }
+                    else if (ride instanceof SharedRide) {
+                        ((SharedRide)ride).removeParticipantById(riderId);
+                        if (((SharedRide)ride).isEmpty()) rideList.removeRideById(riderId);
+                    }
+
+                }
+                // rides.findNext();
+            }
+            return true;
+        }
+        return false;
     }
 
 
@@ -122,8 +136,18 @@ public class RideSharingSystem implements IRideSharingSystem {
      * It returns true if the driver was found and removed; false otherwise
      */
     public boolean removeDriver(int driverId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeDriver'");
+        LinkedList<IRide> rides = rideList.getAllAlphabetically();
+        if (driverList.removeById(driverId)) {
+            // rides.findFirst();
+            for(int i = 0; i < rideList.size(); i++) {
+                IRide ride = rides.retrieve();
+                if (ride.getDriver().getId() == driverId) rideList.removeRideById(ride.getRideId());
+
+                // rides.findNext();
+            }
+            return true;
+        }
+        return false;
     }
 
 
@@ -138,8 +162,41 @@ public class RideSharingSystem implements IRideSharingSystem {
      */
     public boolean schedulePrivateRide(String pickupLocation, IDateTime pickupTime, IDateTime dropoffTime,
             String dropoffLocation, int riderId, int driverId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'schedulePrivateRide'");
+        IRider rider = riderList.findById(riderId);
+        IDriver driver = driverList.findById(driverId);
+
+        if (rider == null || driver == null) return false;
+
+        LinkedList<IRide> riderRides = rider.getRideHistory();
+        
+        // riderRides.findFirst();
+        while (riderRides != null && !riderRides.last()) {
+            IRide ride = riderRides.retrieve();
+            if (ride.getPickupTime().compareTo(dropoffTime) == 0 || ride.getDropoffTime().compareTo(dropoffTime) == 0) return false;
+            // riderRides.findNext();
+        }
+
+        if (riderRides != null) // for the last ride  
+            if (riderRides.retrieve().getPickupTime().compareTo(dropoffTime) == 0 || riderRides.retrieve().getDropoffTime().compareTo(dropoffTime) == 0) 
+                return false;
+       
+        
+        
+        LinkedList<IRide> driverRides = driver.getRideHistory();
+        
+        // driverRides.findFirst();
+        while (driverRides != null && !driverRides.last()) {
+            IRide ride = driverRides.retrieve();
+            if (ride.getPickupTime().compareTo(dropoffTime) == 0 || ride.getDropoffTime().compareTo(dropoffTime) == 0) return false;
+            // driverRides.findNext();
+        }
+
+        if (driverRides != null) // for the last ride  
+            if (driverRides.retrieve().getPickupTime().compareTo(dropoffTime) == 0 || driverRides.retrieve().getDropoffTime().compareTo(dropoffTime) == 0)
+                return false;
+
+            // return rideList.addRide(new PrivateRide()) 
+            return true;
     }
 
 
