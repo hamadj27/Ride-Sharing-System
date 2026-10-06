@@ -74,4 +74,8 @@ public class DateTime implements IDateTime {
         }
         return this.minute - other.getMinute();
     }
+    @Override
+    public String toString() {
+        return format();
+    }
 }

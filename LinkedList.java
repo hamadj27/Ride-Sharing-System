@@ -30,20 +30,26 @@ public class LinkedList<T> {
     public void update (T data) {
     	current.setData(data);
     }
-    
+
     public void insert(T data) {
         Node<T> tmp = new Node<T>(data);
+
         if (empty()) {
             current = head = tail = tmp;
+        } else if (current == null) {
+            tail.setNext(tmp);
+            tail = tmp;
+            current = tmp;
         } else {
             tmp.setNext(current.getNext());
             current.setNext(tmp);
+
             if (current == tail) {
                 tail = tmp;
             }
+
             current = tmp;
         }
-    
     }
 
     public void remove() {
