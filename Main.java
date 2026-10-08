@@ -158,7 +158,7 @@ public class Main {
                 System.out.print("Enter phone number: ");
                 String phone = input.nextLine();
 
-                System.out.print("Enter vehicle plate: ");
+                System.out.print("Enter vehicle plate (XXX0000): ");
                 String plate = input.nextLine();
 
                 System.out.print("Enter vehicle type (SEDAN, LUXURY_SEDAN, SUV, VAN): ");
